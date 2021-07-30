@@ -3,29 +3,28 @@
 using namespace std;
 struct String			//Пока что структура, после завершения дз поработаю над инкапсуляцией.
 {
-	string Str;
 	//methods
-	void print() {cout << Str; }
+	void print() {cout << this; }
 	//constructors
 	String()
 	{
 		const int SIZE = 80;
-		Str[SIZE];
+		this[SIZE];
 		cout << "\nDefault Constructor\n";
 	}
-	/*String(const char Hello)
-	{
-		Str = "Hello";
-	}*/
 	~String()
 	{
 		cout << "\nDesturctor\n";
+	}
+	String& operator =(const String& other)
+	{
+		
 	}
 };
 void main()
 {
 	String str;	//Создает пустую строку размером 80 Байт   DONE
-	String str1 = "Hello";
+	//String str1 = "Hello";
 	/*cout << str1 << endl;
 	String str2 = "World";
 	cout << str2 << endl;
