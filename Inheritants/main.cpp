@@ -27,13 +27,17 @@ unsigned int five)
 	cout << "Total salary per month: " << two + four + five << endl;
 	cout << "Total salary: " << one + two + three + four + five << endl;
 }
-//Рандом корявый, иногда генерирует одно и то же, но хотя-бы так
+
 const int srandom(bool value) //true = hour, false = month
 {
 	int wage;
 	if (value)			wage = 100 + rand() % 1000; //hour
 	else if (!value)	wage = 10000 + rand() % 50000; //month
 	return wage;
+}
+const int hrandom()
+{
+	return 150 + rand() % 200; // hours per month
 }
 
 class employee
@@ -77,32 +81,44 @@ public:
 class hour: public employee 
 { 
 	unsigned int salary;
+	unsigned int hours;
 	///////////////////
 public:
 	unsigned int get_sal()
 	{
 		return salary;
 	}
+	unsigned int get_hours()
+	{
+		return hours;
+	}
 	void set_sal(unsigned int value)
 	{
 		salary = value;
+	}
+	void set_hours(unsigned int value)
+	{
+		hours = value;
 	}
 	///////////////////
 	void print()
 	{
 		employee::print();
-		cout << "\nSalary: " << salary << " per hour" << endl;
+		cout << "\nSalary: " << salary << " per hour"
+			 << "\nHours spent: " << hours << endl; 
 	}
 	hour
 	(
 		const string& fname,
 		const string& lname,
-		unsigned int salary
+		unsigned int salary,
+		unsigned int hours
 	):employee(fname, lname)
 	{
 		set_fname(fname);
 		set_lname(lname);
 		set_sal(salary);
+		set_hours(hours);
 	}
 
 };
@@ -140,11 +156,11 @@ public:
 	void main()
 	{
 		srand(time(0));
-		hour one(random(true), random(false), srandom(true));
+		hour one(random(true), random(false), srandom(true), hrandom());
 		one.print();
 		month two(random(true), random(false), srandom(false));
 		two.print();
-		hour three(random(true), random(false), srandom(true));
+		hour three(random(true), random(false), srandom(true), hrandom());
 		three.print();
 		month four(random(true), random(false), srandom(false));
 		four.print();
