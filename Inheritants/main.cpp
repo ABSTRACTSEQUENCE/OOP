@@ -1,49 +1,12 @@
-#include <iostream>
-using namespace std;
+#include"random.h"
+//#define month
 //На организации есть два типа сотрудников - с почасовой и помесячной оплатой.
 //Необходимо расчитать зарплату для отдела из пяти сотрудников.
-const string random(bool value)
-{
-	if (value)
-	{	
-		const string fnames[5]{ "Ivan", "John", "Adam","Pavel", "Josh"};
-		int random = rand() % 5;
-		return fnames[random];
-	}
-	else if (!value)
-	{
-		const string lnames[5]{ "Petrov", "Kuzmin", "Marston", "Ducks", "Brown"};
-		int random = rand() % 5;
-		return lnames[random];
-	}
-};
-void calc
-(
-unsigned int one,	unsigned int two,
-unsigned int three, unsigned int four,
-unsigned int five)
-{
-	cout << "Total salary per hour: " << one + three << endl;
-	cout << "Total salary per month: " << two + four + five << endl;
-	cout << "Total salary: " << one + two + three + four + five << endl;
-}
-
-const int srandom(bool value) //true = hour, false = month
-{
-	int wage;
-	if (value)			wage = 100 + rand() % 1000; //hour
-	else if (!value)	wage = 10000 + rand() % 50000; //month
-	return wage;
-}
-const int hrandom()
-{
-	return 150 + rand() % 200; // hours per month
-}
-
 class employee
 {
 	string fname;
 	string lname;
+	unsigned int salary;
 public:
 	//methods
 	void print()
@@ -59,6 +22,14 @@ public:
 	{
 		return lname;
 	}
+	const unsigned int get_sal()
+	{
+		return salary;
+	}
+	void set_sal(unsigned int value)
+	{
+		salary = value;
+	}
 	void set_fname(const string& value)
 	{
 		fname = value;
@@ -71,40 +42,33 @@ public:
 	employee
 	(
 		const string& fname,
-		const string& lname
+		const string& lname,
+		unsigned int salary
 	)
 	{
 		this->fname = fname;
 		this->lname = lname;
+		this->salary = salary;
 	}
 };
 class hour: public employee 
 { 
-	unsigned int salary;
 	unsigned int hours;
-	///////////////////
+
 public:
-	unsigned int get_sal()
-	{
-		return salary;
-	}
 	unsigned int get_hours()
 	{
 		return hours;
-	}
-	void set_sal(unsigned int value)
-	{
-		salary = value;
 	}
 	void set_hours(unsigned int value)
 	{
 		hours = value;
 	}
-	///////////////////
+
 	void print()
 	{
 		employee::print();
-		cout << "\nSalary: " << salary << " per hour"
+		cout << "\nSalary: " << get_sal() << " per hour"
 			 << "\nHours spent: " << hours << endl; 
 	}
 	hour
@@ -113,7 +77,7 @@ public:
 		const string& lname,
 		unsigned int salary,
 		unsigned int hours
-	):employee(fname, lname)
+	):employee(fname, lname, salary)
 	{
 		set_fname(fname);
 		set_lname(lname);
@@ -122,40 +86,34 @@ public:
 	}
 
 };
+#ifdef month
 class month : public employee
 {
-	unsigned int salary_month;
 	///////////////////
 public:
-	unsigned int get_sal()
-	{
-		return salary_month;
-	}
-	void set_sal(unsigned int value)
-	{
-		salary_month = value;
-	}
 	///////////////////
 	void print()
 	{
 		employee::print();
-		cout << "\nSalary: " << salary_month << " per month" << endl;
+		cout << "\nSalary: " << salary << " per month" << endl;
 	}
 	month
 	(
 		const string& fname,
 		const string& lname,
 		unsigned int salary
-	) :employee(fname, lname)
+	) :employee(fname, lname,salary)
 	{
 		set_fname(fname);
 		set_lname(lname);
 		set_sal(salary);
 	}
 };
+#endif
 	void main()
 	{
 		srand(time(0));
+		/*
 		hour one(random(true), random(false), srandom(true), hrandom());
 		one.print();
 		month two(random(true), random(false), srandom(false));
@@ -166,10 +124,10 @@ public:
 		four.print();
 		month five(random(true), random(false), srandom(false));
 		five.print();
-		cout << endl;
-		calc
-		(
-			one.get_sal(), two.get_sal(),
-			three.get_sal(), four.get_sal(),
-			five.get_sal());
+		cout << endl;*/
+		hour one(random(true), random(false), srandom(true), hrandom());
+		hour two(random(true), random(false), srandom(true), hrandom());
+		hour department_1[]{ one, two };
+		department_1[1].print();
+		cout << "\nSalary: " << department_1[1].get_sal() * department_1[1].get_hours();
 	}

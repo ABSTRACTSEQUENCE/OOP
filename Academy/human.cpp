@@ -1,10 +1,10 @@
 #include "human.h"
 
-	const std::string& Human::get_last_name()const
+	const string& Human::get_last_name()const
 	{
 		return last_name;
 	}
-	const std::string& Human::get_first_name()const
+	const string& Human::get_first_name()const
 	{
 		return first_name;
 	}
