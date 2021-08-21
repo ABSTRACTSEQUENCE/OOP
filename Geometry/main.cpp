@@ -12,17 +12,19 @@ class square
 protected:
 	double a;
 public:
-	virtual double area(double a) { return a * a; }
-	virtual double perimeter(double a) { return a + a; }
+	virtual void area(double a) { cout << a * a; }
+	virtual void perimeter(double a) { cout << a + a; }
 
 	double get_a() { return a; }
 	void set_a(double value) { a = value; }
 	virtual void print()
 	{
 
-			cout
-			<< "\nArea: " << area(a)
-			<< "\nPerimeter: " << perimeter(a)
+		cout
+			<< "\nArea: "; area(a);
+		cout
+			<< "\nPerimeter: "; perimeter(a);
+		cout
 			<< "\na = " << get_a();
 
 	}
@@ -38,12 +40,19 @@ public:
 	double get_b() { return b; }
 	void set_b(double value) { b = value; }
 
-	double area(double a, double b) { return a * b; }
-	double perimeter(double a, double b) { return 2 * (a + b); }
+	void area(double a, double b) { cout << a * b; }
+	void perimeter(double a, double b) { cout << 2 * (a + b); }
 	void print()
 	{
-		square::print();
+		cout
+			<< "\na = " << get_a();
+
 		cout << "\nb= " << get_b();
+
+		cout
+			<< "\nArea: "; area(a,b);
+		cout
+			<< "\nPerimeter: "; perimeter(a,b);
 	}
 	rectangle(double a, double b):square(a) { set_b(b), set_a(a); cout << "\nRconstructor: " << this; }
 	~rectangle() { cout << "\nRDestructor " << this <<  endl; }
@@ -65,6 +74,6 @@ void main()
 {
 	rectangle rect(2, 3);
 	rect.print();
-	square sq(3);
-	sq.print();
+	//square sq(3);
+//	sq.print();
 }

@@ -15,7 +15,7 @@ public:
 	void set_age(unsigned int age);
 	//				Constructors
 	Human(const string& last_name, const string& first_name, unsigned int age);
-	~Human();
+	virtual ~Human();
 	//				Methods:
 	virtual void print()const;
 protected:

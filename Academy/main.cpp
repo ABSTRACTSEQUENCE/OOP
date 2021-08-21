@@ -5,8 +5,9 @@
 #include "teacher.h"
 #include"grad.h"
 #define delimiter "\n----------------------------------------------\n"
-//#define poly
-#define INHERITANCE
+//#define SIZEOF
+#define poly
+//#define INHERITANCE
 void main()
 {
 	setlocale(LC_ALL, "");
@@ -41,8 +42,12 @@ void main()
 		group[i]->print();
 		cout << delimiter << endl;
 	}
+	for (int i = 0; i < sizeof(group) / sizeof(Human*); i++)
+	{ delete group[i]; }
 #endif
+#ifdef SIZEOF
 	/*typedef int datatype;
 	datatype arr[] = { 2,3,5,8,13,21,34 };
 	for (int i = 0; i < sizeof(arr)/sizeof(datatype); i++) cout << arr[i] << endl;*/
+#endif
 }
