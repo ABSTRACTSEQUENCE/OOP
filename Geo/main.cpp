@@ -70,16 +70,18 @@ public:
 	void draw()
 	{
 		HWND hwnd = GetConsoleWindow();
+		//hwnd = FindWindow(NULL, L"Inheritants - Microsoft Visual Studio");
+		hwnd = GetDesktopWindow();
 		HDC hdc = GetDC(hwnd);
 		HPEN pen = CreatePen(PS_SOLID, 5, color::COLOR);
 		SelectObject(hdc, pen);
-		Ellipse(hdc, 100, 100, r, d);
+		Ellipse(hdc, 100, 100, r, d);//появился в левом верхнем углу норм игра)
 		cout << "\n\n\n\n\n\n\n\n\n\n\n\n";
 	}
 
 	Circle(double r, double d) { this->r = r, this->d = d; }
 };
-class poly
+class triangle
 {
 	double a; double b; double c; double height;
 public:
@@ -91,7 +93,7 @@ public:
 	void set_b(double value) { b = value; }
 	void set_c(double value) { c = value; }
 
-	poly(double a, double b, double c)
+	triangle(double a, double b, double c)
 	{
 		this->a = a;
 		this->b = b;
@@ -99,21 +101,20 @@ public:
 	};
 	//////////////////////////////////////////////
 	double perimer() { return a + b + c; }
-	double area(double perimeter) 
-	{ 
+	double area(double perimeter)
+	{
 		double hper = perimeter / 2;  //hper = half perimeter
 		return sqrt(hper * (hper - a) * (hper - b) * (hper - c));
 	}
-	double height(double perimeter) 
-	{
-		double hper = perimeter / 2;  //hper = half perimeter
-		height = 2 * sqrt(hper * (hper - a) * (hper - b) * (hper - c));
-		return height;
-	}
 };
+	//double height(double perimeter) 
+	//{
+	//	double hper = perimeter / 2;  //hper = half perimeter
+	//	height = 2 * sqrt(hper * (hper - a) * (hper - b) * (hper - c));
+	//	return height;
+	//}
+
 void main()
 {
-	poly poly(10, 10, 10);
-	double p = poly.perimer();
-	cout << poly.area(p);
+	triangle tri(10, 10, 10);
 }
